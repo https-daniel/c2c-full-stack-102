@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Container, InputGroup, FormControl, Button } from "react-bootstrap";
 
-const CLIENT_ID = "42a586352ead4647a29602325f895e15";
-const CLIENT_SECRET = "1e3aa9b91f55475c8989124bfc8366ec";
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+const CLIENT_SECRET = process.env.REACT_APP_CLIENT_SECRET;
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
@@ -29,8 +29,8 @@ function App() {
       });
   }, []);
 
-  const handleSearchClick = () => {
-    console.log("clicked button");
+  const search = async () => {
+    console.log("Search for " + searchInput); // Drake
 
     var searchParameters = {
       method: "GET",
@@ -39,8 +39,8 @@ function App() {
         Authorization: "Bearer " + accessToken,
       },
     };
-
-    var artistID = fetch(
+    // Update this section to get the artist id from the search results
+    var artistID = await fetch(
       "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
       searchParameters
     )
@@ -49,6 +49,8 @@ function App() {
         console.log(data);
         return data;
       });
+
+    console.log(artistID);
   };
 
   return (
@@ -63,12 +65,12 @@ function App() {
           onKeyDown={(event) => {
             console.log("key pressed:", event.key);
             if (event.key === "Enter") {
-              handleSearchClick();
+              search();
             }
           }}
           onChange={(event) => setSearchInput(event.target.value)}
         />
-        <Button variant="primary" onClick={handleSearchClick}>
+        <Button variant="primary" onClick={search}>
           Search
         </Button>
       </InputGroup>
