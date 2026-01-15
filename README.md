@@ -27,7 +27,7 @@ The main course project is an **e-commerce website** backed by a working databas
 
 ## Sync your fork to the latest course code
 
-Course staff will update this repository over time. If your fork is behind, you can sync it from the GitHub website.
+Course staff will update this repository often. If your fork is behind, you can sync it from the GitHub website - do this at the beginning of every class.
 
 ### Syncing a fork branch from the web UI
 
